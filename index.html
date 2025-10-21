@@ -699,11 +699,11 @@ ${formData.message}
           }
         })
         .catch(() => alert('❌ Помилка мережі. Спробуйте ще раз.'));
-            })
-            .finally(() => {
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Надіслати заявку';
-                submitBtn.disabled = false;
-            });
+        })
+        .finally(() => {
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Надіслати заявку';
+            submitBtn.disabled = false;
+        });
     </script>
 </body>
 </html>
