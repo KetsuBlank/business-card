@@ -636,74 +636,60 @@
         }
 
         // Обработка формы
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                service: document.getElementById('service').value,
-                budget: document.getElementById('budget').value,
-                deadline: document.getElementById('deadline').value,
-                message: document.getElementById('message').value
-            };
-            
-            // Валидация обязательных полей
-            if (!formData.name || !formData.email || !formData.service || !formData.message) {
-                alert('Будь ласка, заповніть обовʼязкові поля');
-                return;
-            }
-            
-            // Валидация телефона (если заполнен)
-            if (formData.phone && !validatePhone(formData.phone)) {
-                alert('Будь ласка, введіть коректний номер телефону');
-                return;
-            }
-            
-            const submitBtn = this.querySelector('.submit-btn');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Відправка...';
-            submitBtn.disabled = true;
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        service: document.getElementById('service').value,
+        budget: document.getElementById('budget').value,
+        deadline: document.getElementById('deadline').value,
+        message: document.getElementById('message').value
+    };
+    
+    // Валидация обязательных полей
+    if (!formData.name || !formData.email || !formData.service || !formData.message) {
+        alert('Будь ласка, заповніть обовʼязкові поля');
+        return;
+    }
+    
+    // Валидация телефона (если заполнен)
+    if (formData.phone && !validatePhone(formData.phone)) {
+        alert('Будь ласка, введіть коректний номер телефону');
+        return;
+    }
+    
+    const submitBtn = this.querySelector('.submit-btn');
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Відправка...';
+    submitBtn.disabled = true;
 
-            // Форматируем телефон для отображения
-            const displayPhone = formData.phone ? formatPhoneForDisplay(formData.phone) : 'Не вказано';
-
-            const telegramMessage = `
-🎬 *НОВА ЗАЯВКА НА ВІДЕОМОНТАЖ!*
-
-👤 *Ім'я:* ${formData.name}
-📧 *Email:* ${formData.email}
-📞 *Телефон:* ${displayPhone}
-🎯 *Послуга:* ${formData.service}
-💰 *Бюджет:* ${formData.budget || 'Не вказано'}
-⏰ *Терміни:* ${formData.deadline || 'Не вказано'}
-
-📝 *Опис проекту:*
-${formData.message}
-
-🕒 ${new Date().toLocaleString('uk-UA')}
-            `;
-            
-            fetch('https://business-card-4722-6e1r5b6x4-ketsublanks-projects.vercel.app/api/send', {
-         method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            alert('✅ Заявку успішно відправлено!');
-            // ...
-          } else {
-            alert('❌ Помилка при відправці');
-          }
-        })
-        .catch(() => alert('❌ Помилка мережі. Спробуйте ще раз.'));
-        })
-        .finally(() => {
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Надіслати заявку';
-            submitBtn.disabled = false;
+    try {
+        const response = await fetch('https://business-card-4722-6e1r5b6x4-ketsublanks-projects.vercel.app/api/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
         });
+        
+        const data = await response.json();
+        console.log('Ответ сервера:', data);
+        
+        if (data.success) {
+            alert('✅ Заявку успішно відправлено!');
+            document.getElementById('orderForm').reset();
+        } else {
+            alert('❌ Помилка: ' + (data.error || 'Невідома помилка'));
+        }
+    } catch (error) {
+        console.error('Ошибка:', error);
+        alert('❌ Помилка мережі. Спробуйте ще раз.');
+    }
+    
+    // Восстанавливаем кнопку
+    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Надіслати заявку';
+    submitBtn.disabled = false;
+});
     </script>
 </body>
 </html>
