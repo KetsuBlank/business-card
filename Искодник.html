@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Руслана Гнипа - Професійний відеомонтажер</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === ОСНОВНІ СТИЛІ === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-image: url("background-pattern.jpg");
+            background-size: 100vw;
+            min-height: 100vh;
+        }
+
+        /* === СЕМАНТИЧНІ ТЕГИ === */
+        header {
+            position: relative;
+            padding: 20px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: #F0E6D2;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("header-fon.jpg");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.97;
+            z-index: -1;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px;
+        }
+
+        section {
+            background: white;
+            margin: 25px 0;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background: #48494D;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 0px 10px;
+        }
+
+        .hero h1 {      
+            font-size: 3rem;
+            margin-bottom: 5px;
+            color: #F0E6D2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #9A9AFF;
+            margin-bottom: 8px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .portfolio-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        /* === СТИЛІ ФОРМИ ЗАМОВЛЕННЯ === */
+        .order-form {
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6a4190);
+            transform: translateY(-2px);
+        }
+
+        /* === СТИЛИ ДЛЯ ТЕЛЕФОНА И ВАЛИДАЦИИ === */
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error input {
+            border-color: #e74c3c;
+        }
+
+        .form-group.success input {
+            border-color: #27ae60;
+        }
+
+        /* === АДАПТИВНІСТЬ === */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 20px;
+            }
+        }
+
+        /* === ГАЛЕРЕЯ НА ВСЮ ШИРИНУ === */
+        .fullwidth-gallery {
+            margin: 0;
+            padding: 0;
+        }
+
+        .gallery-container {
+            display: flex;
+            height: 500px;
+        }
+
+        .gallery-item {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .gallery-item:hover {
+            flex: 1.5;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-overlay p {
+            font-size: 1rem;
+            transform: translateY(20px);
+            transition: transform 0.3s ease-in-out 0.1s;
+            opacity: 0.9;
+        }
+
+        .gallery-item:hover .gallery-overlay h3,
+        .gallery-item:hover .gallery-overlay p {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .gallery-item {
+                height: 300px;
+            }
+            
+            .gallery-item:hover {
+                flex: 1;
+            }
+            
+            .gallery-overlay {
+                opacity: 1;
+                padding: 20px;
+            }
+            
+            .gallery-overlay h3,
+            .gallery-overlay p {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER - Шапка сайту -->
+    <header>
+        <div class="hero">
+            <h1>Руслана Гнипа</h1>
+            <p class="subtitle">Професійний відеомонтажер</p>
+            <p>Перетворюю сирі кадри на захопливі історії</p>
+        </div>
+    </header>
+
+    <!-- Галерея работ -->
+    <section class="fullwidth-gallery">
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="work1.png" alt="Корпоративний ролик">
+                <div class="gallery-overlay">
+                    <!--<h3>Корпоративний ролик</h3>
+                    <p>Промо-відео для IT компанії</p>-->
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="work2.jpg" alt="Весільне відео">
+                <div class="gallery-overlay">
+                    <!--<h3>Весільне відео</h3>
+                    <p>Зворушливий монтаж весільної церемонії</p>-->
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="work3.png" alt="YouTube контент">
+                <div class="gallery-overlay">
+                    <!--<h3>YouTube контент</h3>
+                    <p>Регулярний монтаж для блогера</p>-->
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="work4.png" alt="Рекламний ролик">
+                <div class="gallery-overlay">
+                    <!--<h3>Рекламний ролик</h3>
+                    <p>Відео для соціальних мереж</p>-->
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="work5.gif" alt="Музичний кліп">
+                <div class="gallery-overlay">
+                    <!--<h3>Музичний кліп</h3>
+                    <p>Створення кліпу для артиста</p>-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN - Основний вміст -->
+    <main>
+        <!-- SECTION 1 - Послуги -->
+        <section id="services">
+            <h2><i class="fas fa-concierge-bell"></i> Мої послуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Монтаж відео</h3>
+                    <p>Професійний монтаж роликів будь-якої складності</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Кольорокорекція</h3>
+                    <p>Корекція кольору та створення унікального візуального стилю</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-photo-video"></i>
+                    </div>
+                    <h3>Анімація</h3>
+                    <p>Створення титрів</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Звукове оформлення</h3>
+                    <p>Чистка аудіо, підбір музики та звукових ефектів</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 - Портфоліо -->
+        <section id="portfolio">
+            <h2><i class="fas fa-briefcase"></i> Портфоліо</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i> Відео 1
+                    </div>
+                    <h3>Корпоративний ролик</h3>
+                    <p>Промо-відео для IT компанії</p>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i> Відео 2
+                    </div>
+                    <h3>Весільне відео</h3>
+                    <p>Зворушливий монтаж весільної церемонії</p>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i> Відео 3
+                    </div>
+                    <h3>YouTube контент</h3>
+                    <p>Регулярний монтаж для блогера</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 - Контакти -->
+        <section id="contacts">
+            <h2><i class="fas fa-envelope"></i> Контакти</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3>Телефон</h3>
+                        <p>+38 (063) 123-45-67</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>video.editor@example.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div>
+                        <h3>YouTube</h3>
+                        <p>youtube.com/відеомонтажер</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div>
+                        <h3>Instagram</h3>
+                        <p>@video_editor_pro</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 - Форма замовлення -->
+        <section id="order">
+            <h2><i class="fas fa-edit"></i> Замовити послугу</h2>
+            <form class="order-form" id="orderForm">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Ваше ім'я</label>
+                    <input type="text" id="name" name="name" required placeholder="Введіть ваше ім'я">
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group" id="phoneGroup">
+                    <label for="phone"><i class="fas fa-phone"></i> Телефон</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+38 (XXX) XXX-XX-XX">
+                    <div class="error-message" id="phoneError">Будь ласка, введіть коректний номер телефону</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="service"><i class="fas fa-concierge-bell"></i> Послуга</label>
+                    <select id="service" name="service" required>
+                        <option value="">Оберіть послугу</option>
+                        <option value="montage">Монтаж відео</option>
+                        <option value="color">Кольорокорекція</option>
+                        <option value="graphics"><!--Графіка та--> Анімація</option>
+                        <option value="sound">Звукове оформлення</option>
+                        <option value="complex">Комплексний проект</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="budget"><i class="fas fa-wallet"></i> Бюджет (USD)</label>
+                    <select id="budget" name="budget">
+                        <option value="">Не вказано</option>
+                        <option value="100-300">$100-300</option>
+                        <option value="300-500">$300-500</option>
+                        <option value="500-1000">$500-1000</option>
+                        <option value="1000+">$1000+</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="deadline"><i class="fas fa-calendar-alt"></i> Терміни</label>
+                    <input type="text" id="deadline" name="deadline" placeholder="Наприклад: 1 тиждень">
+                </div>
+
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment"></i> Опис проекту</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Опишіть ваш проект..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Надіслати заявку
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- FOOTER - Підвал сайту -->
+    <footer>
+        <p>&copy; 2025 Руслана Гнипа - Професійний відеомонтажер. Всі права захищені.</p>
+        <p>❤️ Творю. Монтую. Надихаю.</p>
+    </footer>
+
+    <!-- JavaScript для формы замовлення -->
+    <script>
+        // Валидация телефона
+        function validatePhone(phone) {
+            // Украинские номера: +380, 380, 0XX, 80...
+            const phoneRegex = /^(\+38|38|0)?\d{9}$/;
+            const cleanedPhone = phone.replace(/\D/g, '');
+            return phoneRegex.test(cleanedPhone) && cleanedPhone.length >= 9;
+        }
+
+        // Обработчик для телефона
+        document.getElementById('phone').addEventListener('input', function(e) {
+            const phone = e.target.value;
+            const phoneGroup = document.getElementById('phoneGroup');
+            const phoneError = document.getElementById('phoneError');
+            
+            if (phone === '') {
+                phoneGroup.classList.remove('error', 'success');
+                phoneError.style.display = 'none';
+                return;
+            }
+            
+            if (validatePhone(phone)) {
+                phoneGroup.classList.remove('error');
+                phoneGroup.classList.add('success');
+                phoneError.style.display = 'none';
+            } else {
+                phoneGroup.classList.remove('success');
+                phoneGroup.classList.add('error');
+                phoneError.style.display = 'block';
+            }
+        });
+
+        // Форматирование телефона для отображения
+        function formatPhoneForDisplay(phone) {
+            const cleaned = phone.replace(/\D/g, '');
+            if (cleaned.startsWith('380')) {
+                return `+38 (0${cleaned.substring(3, 5)}) ${cleaned.substring(5, 8)}-${cleaned.substring(8, 10)}-${cleaned.substring(10, 12)}`;
+            }
+            return phone;
+        }
+
+        // Обработка формы
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                budget: document.getElementById('budget').value,
+                deadline: document.getElementById('deadline').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Валидация обязательных полей
+            if (!formData.name || !formData.email || !formData.service || !formData.message) {
+                alert('Будь ласка, заповніть обовʼязкові поля');
+                return;
+            }
+            
+            // Валидация телефона (если заполнен)
+            if (formData.phone && !validatePhone(formData.phone)) {
+                alert('Будь ласка, введіть коректний номер телефону');
+                return;
+            }
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Відправка...';
+            submitBtn.disabled = true;
+
+            // Форматируем телефон для отображения
+            const displayPhone = formData.phone ? formatPhoneForDisplay(formData.phone) : 'Не вказано';
+
+            const telegramMessage = `
+🎬 *НОВА ЗАЯВКА НА ВІДЕОМОНТАЖ!*
+
+👤 *Ім'я:* ${formData.name}
+📧 *Email:* ${formData.email}
+📞 *Телефон:* ${displayPhone}
+🎯 *Послуга:* ${formData.service}
+💰 *Бюджет:* ${formData.budget || 'Не вказано'}
+⏰ *Терміни:* ${formData.deadline || 'Не вказано'}
+
+📝 *Опис проекту:*
+${formData.message}
+
+🕒 ${new Date().toLocaleString('uk-UA')}
+            `;
+
+            const botToken = '8449816457:AAFW1XVMX6ypaLpnbGtiLfT7KE5Zy70dGh0';
+            const chatId = '8212484745';
+            
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: telegramMessage,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    alert('✅ Заявку успішно відправлено! Я звʼяжусь з вами протягом 24 годин.');
+                    this.reset();
+                    // Сбрасываем стили телефона
+                    document.getElementById('phoneGroup').classList.remove('error', 'success');
+                    document.getElementById('phoneError').style.display = 'none';
+                } else {
+                    let errorMsg = '❌ Помилка відправки: ';
+                    if (data.description) {
+                        errorMsg += data.description;
+                    }
+                    alert(errorMsg);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('❌ Помилка мережі. Спробуйте ще раз.');
+            })
+            .finally(() => {
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Надіслати заявку';
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
