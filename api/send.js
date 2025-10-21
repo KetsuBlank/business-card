@@ -1,12 +1,30 @@
 // api/send.js
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
+  console.log('🔔 API called at:', new Date().toISOString());
+  
   if (req.method !== 'POST') {
+    console.log('❌ Method not allowed:', req.method);
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, phone, service, budget, deadline, message } = req.body || {};
+  try {
+    const { name, email, phone, service, budget, deadline, message } = req.body || {};
+    console.log('📨 Received data:', { name, email, service });
 
-  const telegramMessage = `
+    // Проверяем Environment Variables
+    if (!process.env.TELEGRAM_TOKEN) {
+      console.error('❌ TELEGRAM_TOKEN is missing');
+      return res.status(500).json({ error: 'Server configuration error: TELEGRAM_TOKEN missing' });
+    }
+    
+    if (!process.env.CHAT_ID) {
+      console.error('❌ CHAT_ID is missing');
+      return res.status(500).json({ error: 'Server configuration error: CHAT_ID missing' });
+    }
+
+    console.log('✅ Environment variables are set');
+
+    const telegramMessage = `
 🎬 *НОВА ЗАЯВКА НА ВІДЕОМОНТАЖ!*
 
 👤 *Ім'я:* ${name || 'Не вказано'}
@@ -20,9 +38,10 @@ export default async function handler(req, res) {
 ${message || 'Не вказано'}
 
 🕒 ${new Date().toLocaleString('uk-UA')}
-  `;
+    `;
 
-  try {
+    console.log('📤 Sending to Telegram...');
+    
     const response = await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -34,13 +53,17 @@ ${message || 'Не вказано'}
     });
 
     const data = await response.json();
-    if (!response.ok || !data.ok) {
-      return res.status(500).json({ error: 'Помилка при відправці в Telegram', details: data });
-    }
+    console.log('📩 Telegram response:', data);
 
-    return res.status(200).json({ success: true });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: 'Внутрішня помилка сервера' });
+    if (data.ok) {
+      console.log('✅ Message sent successfully');
+      return res.status(200).json({ success: true });
+    } else {
+      console.error('❌ Telegram API error:', data);
+      return res.status(500).json({ error: 'Telegram API error', details: data });
+    }
+  } catch (error) {
+    console.error('🔥 Server error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }
