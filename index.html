@@ -475,8 +475,6 @@
                         style="max-width: 100%; margin: 0 auto;">
                         <section></section>
                     </blockquote>
-                    <h3>БУР Запоріжжя</h3>
-                    <p>Волонтерський проєкт</p>
                 </div>
 
                 <!-- Видео 2 (замени ссылку на свою) -->
@@ -487,8 +485,6 @@
                         style="max-width: 100%; margin: 0 auto;">
                         <section></section>
                     </blockquote>
-                    <h3>Весільне відео</h3>
-                    <p>Зворушливий монтаж весільної церемонії</p>
                 </div>
 
                 <!-- Видео 3 (замени ссылку на свою) -->
@@ -499,8 +495,6 @@
                         style="max-width: 100%; margin: 0 auto;">
                         <section></section>
                     </blockquote>
-                    <h3>YouTube контент</h3>
-                    <p>Регулярний монтаж для блогера</p>
                 </div>
 
             </div>
@@ -716,5 +710,25 @@
     submitBtn.disabled = false;
 });
     </script>
+
+    <script>
+    // Дожидаемся загрузки TikTok embed.js и переинициализируем все blockquote
+    function loadTikTokEmbeds() {
+        if (window.tiktokEmbed && typeof window.tiktokEmbed.load === 'function') {
+            // Перебираем все blockquote с классом tiktok-embed
+            document.querySelectorAll('blockquote.tiktok-embed').forEach(function(block) {
+                window.tiktokEmbed.load(block);
+            });
+        } else {
+            // Если скрипт еще не загрузился, пробуем позже
+            setTimeout(loadTikTokEmbeds, 500);
+        }
+    }
+
+    // Ждем полной загрузки страницы
+    window.addEventListener('load', function() {
+        setTimeout(loadTikTokEmbeds, 1000); // небольшая задержка на всякий случай
+    });
+</script>
 </body>
 </html>
