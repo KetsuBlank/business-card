@@ -368,6 +368,15 @@
                 transform: translateY(0);
             }
         }
+
+        .portfolio-item iframe {
+            max-width: 350px;      /* ограничивает ширину вертикального видео */
+            width: 100%;
+            aspect-ratio: 9 / 16;  /* сохраняет пропорции */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
     </style>
       <script async src="https://www.tiktok.com/embed.js"></script>
 </head>
@@ -375,7 +384,7 @@
     <!-- HEADER - Шапка сайту -->
     <header>
         <div class="hero">
-            <h1>Руслана Гнипа Тест ТестТестТестТестТестТестТест</h1>
+            <h1>Руслана Гнипа</h1>
             <p class="subtitle">Професійний відеомонтажер</p>
             <p>Перетворюю сирі кадри на захопливі історії</p>
         </div>
@@ -464,40 +473,46 @@
 
         <!-- SECTION 2 - Портфоліо -->
         <section id="portfolio">
-            <h2><i class="fas fa-briefcase"></i> Портфоліо</h2>
-            <div class="portfolio-grid">
-                
-                <!-- Видео 1 (реальное) -->
-                <div class="portfolio-item">
-                    <blockquote class="tiktok-embed" 
-                        cite="https://www.tiktok.com/@bur_zp/video/7501357561950571781" 
-                        data-video-id="7501357561950571781" 
-                        style="max-width: 100%; margin: 0 auto;">
-                        <section></section>
-                    </blockquote>
-                </div>
+    <h2><i class="fas fa-briefcase"></i> Портфоліо</h2>
+    <div class="portfolio-grid">
+        
+        <!-- Видео 1 -->
+        <div class="portfolio-item">
+            <iframe 
+                src="https://www.tiktok.com/embed/v2/7501357561950571781"
+                width="100%" 
+                height="400" 
+                frameborder="0" 
+                allowfullscreen
+                style="max-width: 100%; border-radius: 10px;">
+            </iframe>
+        </div>
 
-                <!-- Видео 2 (замени ссылку на свою) -->
-                <div class="portfolio-item">
-                    <blockquote class="tiktok-embed" 
-                        cite="https://www.tiktok.com/@bur_zp/video/7475741743644806406" 
-                        data-video-id="7475741743644806406" 
-                        style="max-width: 100%; margin: 0 auto;">
-                        <section></section>
-                    </blockquote>
-                </div>
+        <!-- Видео 2 -->
+        <div class="portfolio-item">
+            <iframe 
+                src="https://www.tiktok.com/embed/v2/7475741743644806406"
+                width="100%" 
+                height="400" 
+                frameborder="0" 
+                allowfullscreen
+                style="max-width: 100%; border-radius: 10px;">
+            </iframe>
+        </div>
 
-                <!-- Видео 3 (замени ссылку на свою) -->
-                <div class="portfolio-item">
-                    <blockquote class="tiktok-embed" 
-                        cite="https://www.tiktok.com/@bur_zp/video/7476117826764442885" 
-                        data-video-id="7476117826764442885" 
-                        style="max-width: 100%; margin: 0 auto;">
-                        <section></section>
-                    </blockquote>
-                </div>
+        <!-- Видео 3 -->
+        <div class="portfolio-item">
+            <iframe 
+                src="https://www.tiktok.com/embed/v2/7476117826764442885"
+                width="100%" 
+                height="400" 
+                frameborder="0" 
+                allowfullscreen
+                style="max-width: 100%; border-radius: 10px;">
+            </iframe>
+        </div>
 
-            </div>
+    </div>
         </section>
 
         <!-- SECTION 3 - Контакти -->
@@ -710,25 +725,5 @@
     submitBtn.disabled = false;
 });
     </script>
-
-    <script>
-    // Дожидаемся загрузки TikTok embed.js и переинициализируем все blockquote
-    function loadTikTokEmbeds() {
-        if (window.tiktokEmbed && typeof window.tiktokEmbed.load === 'function') {
-            // Перебираем все blockquote с классом tiktok-embed
-            document.querySelectorAll('blockquote.tiktok-embed').forEach(function(block) {
-                window.tiktokEmbed.load(block);
-            });
-        } else {
-            // Если скрипт еще не загрузился, пробуем позже
-            setTimeout(loadTikTokEmbeds, 500);
-        }
-    }
-
-    // Ждем полной загрузки страницы
-    window.addEventListener('load', function() {
-        setTimeout(loadTikTokEmbeds, 1000); // небольшая задержка на всякий случай
-    });
-</script>
 </body>
 </html>
